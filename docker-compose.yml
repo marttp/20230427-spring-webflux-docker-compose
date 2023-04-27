@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: p@ssw0rd
+      POSTGRES_DB: book
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev:/var/lib/postgresql/data
+
+  redis:
+    image: "redis/redis-stack:latest"
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
+volumes:
+  postgres_dev:
